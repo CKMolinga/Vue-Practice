@@ -10,35 +10,40 @@
 </template>
 
 <script>
-import getPost from '@/composables/getPost'
+import getPost from "@/composables/getPost";
 
 // component imports
-import Spinner from '../components/Spinner.vue'
+import Spinner from "../components/Spinner.vue";
+
+import { useRoute } from "vue-router";
 
 export default {
-  props: ['id'],
+  props: ["id"],
   components: { Spinner },
   setup(props) {
-    const { error, post, load } = getPost(props.id)
+    const route = useRoute();
+    console.log(route);
 
-    load()
+    const { error, post, load } = getPost(route.params.id);
 
-    return { error, post }
+    load();
+
+    return { error, post };
   },
-}
+};
 </script>
 
 <style scoped>
-  .post {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .post p {
-    color: #444;
-    line-height: 1.5em;
-    margin-top: 40px;
-  }
-  .pre {
-    white-space: pre-wrap;
-  }
+.post {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.post p {
+  color: #444;
+  line-height: 1.5em;
+  margin-top: 40px;
+}
+.pre {
+  white-space: pre-wrap;
+}
 </style>
